@@ -16,44 +16,70 @@ const globalStyles = `
 
   /* PC用スタイル (768px以上) */
   @media (min-width: 768px) {
+    html, body, #root {
+      display: flex;
+      justify-content: center;
+    }
     .app-container {
-      max-width: 800px !important;
+      max-width: 900px !important;
+      margin: 0 auto !important;
+      width: 100% !important;
     }
     .menu-container {
       max-width: 500px !important;
+      margin: 0 auto !important;
     }
     .game-title {
-      font-size: 42px !important;
+      font-size: 48px !important;
     }
     .mode-button {
-      padding: 24px 32px !important;
+      padding: 28px 36px !important;
     }
     .mode-button-title {
       font-size: 28px !important;
     }
     .mode-button-desc {
-      font-size: 14px !important;
+      font-size: 15px !important;
     }
     .bingo-cell {
-      font-size: 13px !important;
+      font-size: 14px !important;
+      min-height: 70px !important;
     }
     .bingo-cell-icon {
-      font-size: 12px !important;
+      font-size: 14px !important;
     }
     .call-word {
-      font-size: 36px !important;
+      font-size: 40px !important;
     }
     .header-title {
-      font-size: 24px !important;
+      font-size: 26px !important;
     }
     .memory-card {
-      min-height: 90px !important;
+      min-height: 100px !important;
     }
     .memory-card-word {
-      font-size: 16px !important;
+      font-size: 18px !important;
     }
     .memory-card-meaning {
-      font-size: 11px !important;
+      font-size: 13px !important;
+    }
+    .header-btn {
+      font-size: 15px !important;
+      padding: 10px 20px !important;
+    }
+  }
+
+  /* 大画面PC用 (1200px以上) */
+  @media (min-width: 1200px) {
+    .app-container {
+      max-width: 1000px !important;
+    }
+    .game-title {
+      font-size: 56px !important;
+    }
+    .bingo-cell {
+      font-size: 15px !important;
+      min-height: 80px !important;
     }
   }
 
@@ -76,37 +102,43 @@ const globalStyles = `
       font-size: 28px !important;
     }
     .bingo-cell {
-      font-size: 9px !important;
-      padding: 2px !important;
+      font-size: 11px !important;
+      padding: 3px !important;
     }
     .bingo-cell-icon {
-      font-size: 8px !important;
+      font-size: 10px !important;
     }
     .call-word {
       font-size: 24px !important;
     }
     .header-title {
-      font-size: 16px !important;
+      font-size: 18px !important;
     }
     .header-btn {
       padding: 6px 10px !important;
-      font-size: 12px !important;
+      font-size: 13px !important;
     }
     .memory-card {
-      min-height: 65px !important;
+      min-height: 70px !important;
     }
     .memory-card-word {
-      font-size: 11px !important;
+      font-size: 13px !important;
     }
     .memory-card-meaning {
-      font-size: 8px !important;
+      font-size: 11px !important;
+    }
+    .sub-text {
+      font-size: 12px !important;
+    }
+    .small-text {
+      font-size: 11px !important;
     }
   }
 
   /* 超小型スマホ用 (360px以下) */
   @media (max-width: 360px) {
     .bingo-cell {
-      font-size: 8px !important;
+      font-size: 10px !important;
     }
     .call-word {
       font-size: 20px !important;
@@ -116,6 +148,9 @@ const globalStyles = `
     }
     .mode-button-title {
       font-size: 20px !important;
+    }
+    .memory-card-meaning {
+      font-size: 10px !important;
     }
   }
 
@@ -280,8 +315,8 @@ function BingoGame({ onBack }) {
   const isBingoCell = (idx) => bingoLines.some(line => line.includes(idx));
 
   return (
-    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%)", padding: "16px", color: "#e0e0e0" }}>
-      <div style={{ maxWidth: 700, margin: "0 auto" }}>
+    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%)", padding: "16px 20px", color: "#e0e0e0", margin: "0 auto" }}>
+      <div style={{ maxWidth: 750, margin: "0 auto" }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
           <button className="header-btn" onClick={onBack} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14 }}>
@@ -291,7 +326,7 @@ function BingoGame({ onBack }) {
             <h2 className="header-title" style={{ margin: 0, fontSize: 20, color: "#ff6b6b", fontFamily: "'Noto Sans JP', sans-serif", letterSpacing: 2 }}>
               🚨 闇バイトビンゴ 🚨
             </h2>
-            <p style={{ margin: 0, fontSize: 11, color: "#888", marginTop: 2 }}>危険ワードが揃ったら…あなたは犯罪者！</p>
+            <p style={{ margin: 0, fontSize: 12, color: "#b0b0b0", marginTop: 2 }}>危険ワードが揃ったら…あなたは犯罪者！</p>
           </div>
           <button className="header-btn" onClick={resetGame} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14 }}>
             🔄 リセット
@@ -302,7 +337,7 @@ function BingoGame({ onBack }) {
         <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 12, padding: 16, marginBottom: 16, border: "1px solid rgba(255,255,255,0.1)", textAlign: "center" }}>
           {currentCall ? (
             <>
-              <div style={{ fontSize: 11, color: "#888", marginBottom: 4 }}>📢 コール #{callCount}</div>
+              <div style={{ fontSize: 12, color: "#b0b0b0", marginBottom: 4 }}>📢 コール #{callCount}</div>
               <div className="call-word" style={{
                 fontSize: 28, fontWeight: 800, color: getDangerColor(currentCall.danger).bg,
                 textShadow: `0 0 20px ${getDangerColor(currentCall.danger).glow}`,
@@ -323,7 +358,7 @@ function BingoGame({ onBack }) {
               )}
             </>
           ) : (
-            <div style={{ color: "#666", fontSize: 14 }}>「次のワード」を押してゲーム開始！</div>
+            <div style={{ color: "#a0a0a0", fontSize: 14 }}>「次のワード」を押してゲーム開始！</div>
           )}
           <button
             onClick={callNext}
@@ -388,7 +423,7 @@ function BingoGame({ onBack }) {
                         : "rgba(255,255,255,0.03)",
                   border: isBingo ? "2px solid #fff" : isSelected ? `2px solid ${dangerStyle.bg}` : "1px solid rgba(255,255,255,0.08)",
                   borderRadius: 8, cursor: isFree ? "default" : "pointer",
-                  color: isSelected || isBingo ? "#fff" : isCalled ? "#ddd" : "#555",
+                  color: isSelected || isBingo ? "#fff" : isCalled ? "#e0e0e0" : "#888",
                   padding: 4, transition: "all 0.2s",
                   boxShadow: isBingo ? `0 0 20px ${dangerStyle.glow}` : isSelected ? `0 0 10px ${dangerStyle.glow}` : "none",
                   fontSize: 11, minHeight: 60
@@ -398,8 +433,8 @@ function BingoGame({ onBack }) {
                   <span style={{ fontSize: 14, fontWeight: 800 }}>FREE</span>
                 ) : (
                   <>
-                    <span className="bingo-cell-icon" style={{ fontSize: 10, opacity: 0.7 }}>{getCategoryIcon(cell.category)}</span>
-                    <span style={{ fontSize: cell.word.length > 6 ? 9 : 11, fontWeight: 700, lineHeight: 1.2, textAlign: "center", wordBreak: "break-all" }}>
+                    <span className="bingo-cell-icon" style={{ fontSize: 12, opacity: 0.8 }}>{getCategoryIcon(cell.category)}</span>
+                    <span style={{ fontSize: cell.word.length > 6 ? 11 : 13, fontWeight: 700, lineHeight: 1.2, textAlign: "center", wordBreak: "break-all" }}>
                       {cell.word}
                     </span>
                   </>
@@ -412,11 +447,11 @@ function BingoGame({ onBack }) {
         {/* Called History */}
         {calledWords.length > 0 && (
           <div style={{ marginTop: 16, background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 12 }}>
-            <div style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>📋 コール履歴（{calledWords.length}語）</div>
+            <div style={{ fontSize: 13, color: "#b0b0b0", marginBottom: 8 }}>📋 コール履歴（{calledWords.length}語）</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
               {calledWords.map((w, i) => (
                 <span key={i} style={{
-                  fontSize: 10, padding: "2px 8px", borderRadius: 4,
+                  fontSize: 12, padding: "3px 10px", borderRadius: 4,
                   background: `${getDangerColor(w.danger).bg}22`,
                   color: getDangerColor(w.danger).bg,
                   border: `1px solid ${getDangerColor(w.danger).bg}44`
@@ -429,8 +464,8 @@ function BingoGame({ onBack }) {
         )}
 
         {/* Instructions */}
-        <div style={{ marginTop: 16, background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 12, fontSize: 11, color: "#888" }}>
-          <strong style={{ color: "#aaa" }}>📖 遊び方</strong>
+        <div style={{ marginTop: 16, background: "rgba(255,255,255,0.05)", borderRadius: 12, padding: 12, fontSize: 13, color: "#b0b0b0" }}>
+          <strong style={{ color: "#d0d0d0" }}>📖 遊び方</strong>
           <div style={{ marginTop: 4 }}>
             ①「次のワード」でワードを引く → ② ボード上に同じワードがあればタップ → ③ 縦・横・斜めが揃ったらビンゴ！<br/>
             💡 ワードの意味ボタンで解説が見られます。<strong style={{ color: "#ff6b6b" }}>揃えば揃うほど犯罪に近づく</strong>ことを体感しよう。
@@ -512,8 +547,8 @@ function MemoryGame({ onBack }) {
   const cols = pairCount <= 6 ? 3 : 4;
 
   return (
-    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #0a1a2e 50%, #1a0a2e 100%)", padding: "16px", color: "#e0e0e0" }}>
-      <div style={{ maxWidth: 700, margin: "0 auto" }}>
+    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #0a1a2e 50%, #1a0a2e 100%)", padding: "16px 20px", color: "#e0e0e0", margin: "0 auto" }}>
+      <div style={{ maxWidth: 750, margin: "0 auto" }}>
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
           <button className="header-btn" onClick={onBack} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14 }}>
@@ -523,7 +558,7 @@ function MemoryGame({ onBack }) {
             <h2 className="header-title" style={{ margin: 0, fontSize: 20, color: "#448aff", fontFamily: "'Noto Sans JP', sans-serif", letterSpacing: 2 }}>
               🧠 闇バイト神経衰弱 🧠
             </h2>
-            <p style={{ margin: 0, fontSize: 11, color: "#888", marginTop: 2 }}>危険ワードと意味をマッチさせよう</p>
+            <p style={{ margin: 0, fontSize: 12, color: "#b0b0b0", marginTop: 2 }}>危険ワードと意味をマッチさせよう</p>
           </div>
           <button className="header-btn" onClick={() => initGame(pairCount)} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14 }}>
             🔄
@@ -535,8 +570,8 @@ function MemoryGame({ onBack }) {
           {[6, 8, 10].map(n => (
             <button key={n} onClick={() => setPairCount(n)} style={{
               padding: "6px 16px", borderRadius: 8, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700,
-              background: pairCount === n ? "linear-gradient(135deg, #448aff, #536dfe)" : "rgba(255,255,255,0.08)",
-              color: pairCount === n ? "#fff" : "#888",
+              background: pairCount === n ? "linear-gradient(135deg, #448aff, #536dfe)" : "rgba(255,255,255,0.1)",
+              color: pairCount === n ? "#fff" : "#b0b0b0",
               boxShadow: pairCount === n ? "0 2px 10px rgba(68,138,255,0.3)" : "none"
             }}>
               {n}ペア
@@ -545,7 +580,7 @@ function MemoryGame({ onBack }) {
         </div>
 
         {/* Stats */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, fontSize: 13, color: "#888" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, fontSize: 14, color: "#b0b0b0" }}>
           <span>🎯 {matched.size}/{pairCount} ペア</span>
           <span>🔄 {attempts} 回</span>
         </div>
@@ -559,7 +594,7 @@ function MemoryGame({ onBack }) {
             <div style={{ fontSize: 14, color: "#00e676", fontWeight: 700 }}>
               ✅ マッチ！「{showResult.word.word}」
             </div>
-            <div style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>{showResult.word.meaning}</div>
+            <div style={{ fontSize: 12, color: "#c0c0c0", marginTop: 4 }}>{showResult.word.meaning}</div>
           </div>
         )}
 
@@ -621,11 +656,11 @@ function MemoryGame({ onBack }) {
               >
                 {(isFlipped || isMatched) ? (
                   <>
-                    <span style={{ fontSize: 10, opacity: 0.7, marginBottom: 2 }}>
+                    <span style={{ fontSize: 12, opacity: 0.8, marginBottom: 2 }}>
                       {card.type === "word" ? getCategoryIcon(card.category) : "📝"}
                     </span>
                     <span className={card.type === "word" ? "memory-card-word" : "memory-card-meaning"} style={{
-                      fontSize: card.type === "word" ? (card.word.length > 6 ? 12 : 14) : 10,
+                      fontSize: card.type === "word" ? (card.word.length > 6 ? 13 : 15) : 12,
                       fontWeight: card.type === "word" ? 800 : 500,
                       lineHeight: 1.3, textAlign: "center",
                       wordBreak: "break-all"
@@ -642,8 +677,8 @@ function MemoryGame({ onBack }) {
         </div>
 
         {/* Instructions */}
-        <div style={{ marginTop: 16, background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 12, fontSize: 11, color: "#888" }}>
-          <strong style={{ color: "#aaa" }}>📖 遊び方</strong>
+        <div style={{ marginTop: 16, background: "rgba(255,255,255,0.05)", borderRadius: 12, padding: 12, fontSize: 13, color: "#b0b0b0" }}>
+          <strong style={{ color: "#d0d0d0" }}>📖 遊び方</strong>
           <div style={{ marginTop: 4 }}>
             カードを2枚めくって、<strong style={{ color: "#448aff" }}>危険ワード</strong>とその<strong style={{ color: "#448aff" }}>意味</strong>のペアを見つけよう！<br/>
             少ない回数でクリアを目指そう。闇バイトの手口を覚えて自分を守ろう！
@@ -661,8 +696,8 @@ function WordList({ onBack }) {
   const filtered = filter === "all" ? DANGER_WORDS : DANGER_WORDS.filter(w => w.category === filter);
 
   return (
-    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0a1a2e 100%)", padding: "16px", color: "#e0e0e0" }}>
-      <div style={{ maxWidth: 700, margin: "0 auto" }}>
+    <div className="app-container" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0a1a2e 100%)", padding: "16px 20px", color: "#e0e0e0", margin: "0 auto" }}>
+      <div style={{ maxWidth: 750, margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16, flexWrap: "wrap" }}>
           <button className="header-btn" onClick={onBack} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14 }}>
             ← 戻る
@@ -674,8 +709,8 @@ function WordList({ onBack }) {
           {categories.map(cat => (
             <button key={cat} onClick={() => setFilter(cat)} style={{
               padding: "8px 16px", borderRadius: 8, border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600,
-              background: filter === cat ? "linear-gradient(135deg, #7c4dff, #536dfe)" : "rgba(255,255,255,0.08)",
-              color: filter === cat ? "#fff" : "#888"
+              background: filter === cat ? "linear-gradient(135deg, #7c4dff, #536dfe)" : "rgba(255,255,255,0.1)",
+              color: filter === cat ? "#fff" : "#b0b0b0"
             }}>
               {cat === "all" ? "すべて" : cat}
             </button>
@@ -692,13 +727,13 @@ function WordList({ onBack }) {
               }}>
                 <div style={{ minWidth: 40, textAlign: "center" }}>
                   <div style={{ fontSize: 20 }}>{getCategoryIcon(w.category)}</div>
-                  <div style={{ fontSize: 9, color: d.bg, marginTop: 2 }}>
+                  <div style={{ fontSize: 11, color: d.bg, marginTop: 2 }}>
                     {"⚡".repeat(w.danger)}
                   </div>
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 16, fontWeight: 800, color: d.bg }}>{w.word}</div>
-                  <div style={{ fontSize: 13, color: "#aaa", marginTop: 4, lineHeight: 1.5 }}>{w.meaning}</div>
+                  <div style={{ fontSize: 14, color: "#c0c0c0", marginTop: 4, lineHeight: 1.5 }}>{w.meaning}</div>
                 </div>
               </div>
             );
@@ -752,7 +787,7 @@ export default function App() {
         }}>
           闇バイトビンゴ
         </h1>
-        <p style={{ color: "#888", fontSize: 14, marginTop: 12, maxWidth: 400, lineHeight: 1.7, margin: "12px auto 0" }}>
+        <p style={{ color: "#b0b0b0", fontSize: 15, marginTop: 12, maxWidth: 400, lineHeight: 1.7, margin: "12px auto 0" }}>
           ゲームで学ぶ闇バイトの危険ワード<br />
           <span style={{ color: "#ff6b6b" }}>知ることが、自分を守る第一歩</span>
         </p>
@@ -771,7 +806,7 @@ export default function App() {
           }}
         >
           <div className="mode-button-title" style={{ fontSize: 24, marginBottom: 6 }}>🎯 ビンゴモード</div>
-          <div className="mode-button-desc" style={{ fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>
+          <div className="mode-button-desc" style={{ fontSize: 14, color: "#c0c0c0", lineHeight: 1.5 }}>
             危険ワードが5つ揃ったらビンゴ＝犯罪者！<br/>
             クラス全体で盛り上がれるモード
           </div>
@@ -788,7 +823,7 @@ export default function App() {
           }}
         >
           <div className="mode-button-title" style={{ fontSize: 24, marginBottom: 6 }}>🧠 神経衰弱モード</div>
-          <div className="mode-button-desc" style={{ fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>
+          <div className="mode-button-desc" style={{ fontSize: 14, color: "#c0c0c0", lineHeight: 1.5 }}>
             危険ワードとその意味をマッチング！<br/>
             個人・ペア学習に最適
           </div>
@@ -805,7 +840,7 @@ export default function App() {
           }}
         >
           <div className="mode-button-title" style={{ fontSize: 24, marginBottom: 6 }}>📚 危険ワード一覧</div>
-          <div className="mode-button-desc" style={{ fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>
+          <div className="mode-button-desc" style={{ fontSize: 14, color: "#c0c0c0", lineHeight: 1.5 }}>
             全30語の危険ワードと意味を確認<br/>
             授業の解説・振り返りに
           </div>
@@ -813,7 +848,7 @@ export default function App() {
       </div>
 
       {/* Footer */}
-      <div style={{ marginTop: 48, textAlign: "center", fontSize: 11, color: "#666", maxWidth: 340, lineHeight: 1.7, padding: "0 16px" }}>
+      <div style={{ marginTop: 48, textAlign: "center", fontSize: 13, color: "#a0a0a0", maxWidth: 360, lineHeight: 1.7, padding: "0 16px" }}>
         ⚠️ このアプリは教育目的で制作されています。<br/>
         闇バイトに関わってしまった場合は<br/>
         <strong style={{ color: "#ff6b6b" }}>警察相談専用電話 #9110</strong> に相談してください。
